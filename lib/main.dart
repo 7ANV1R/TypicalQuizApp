@@ -36,10 +36,12 @@ class _QuizPageState extends State<QuizPage> {
           flex: 10,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Text(
-              'Question',
-              style: TextStyle(
-                color: Colors.white,
+            child: Center(
+              child: Text(
+                'Question 01: ------------------------',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
