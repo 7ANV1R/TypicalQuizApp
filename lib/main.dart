@@ -27,13 +27,13 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
   List<String> question = [
-    'Qu1',
-    'Qu2',
-    'Qu3',
+    'Tanvir is a good boy!',
+    'Tanvir is a bad boy!',
+    'Tanvir is a very bad boy!',
   ];
   List<bool> answer = [
-    true,
     false,
+    true,
     true,
   ];
   int qutrack = 0;
