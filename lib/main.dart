@@ -26,6 +26,18 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
+  List<String> question = [
+    'Qu1',
+    'Qu2',
+    'Qu3',
+  ];
+  List<bool> answer = [
+    true,
+    false,
+    true,
+  ];
+  int qutrack = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,7 +50,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'Question 01: ------------------------',
+                question[qutrack],
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -52,14 +64,19 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: () {
+                bool correctans = answer[qutrack];
+
+                if (correctans == true) {
+                  print('Right!');
+                } else {
+                  print('DeadWrong!');
+                }
                 setState(
                   () {
-                    scorekeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );
+                    if (qutrack == 2) {
+                      qutrack = 0;
+                    } else
+                      qutrack++;
                   },
                 );
               },
@@ -80,14 +97,19 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: () {
+                bool correctans = answer[qutrack];
+
+                if (correctans == false) {
+                  print('Right!');
+                } else {
+                  print('DeadWrong!');
+                }
                 setState(
                   () {
-                    scorekeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.redAccent,
-                      ),
-                    );
+                    if (qutrack == 2) {
+                      qutrack = 0;
+                    } else
+                      qutrack++;
                   },
                 );
               },
