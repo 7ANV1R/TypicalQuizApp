@@ -3,9 +3,9 @@ import 'question.dart';
 class QuizBrain {
   int _qutrack = 0;
   List<Question> _questionbank = [
-    Question('First Question', true),
-    Question('Second Question', false),
-    Question('Third Question', true),
+    Question('Tanvir is a bad boy.', true),
+    Question('Tanvir is a goood boy.', false),
+    Question('Tanvir is very bad boy.', true),
   ];
 
   void goNextQu() {
