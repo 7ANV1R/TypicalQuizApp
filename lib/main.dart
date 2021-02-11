@@ -11,7 +11,7 @@ class QuizApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.blueGrey[900],
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
