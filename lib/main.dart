@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'quizbrain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(QuizApp());
 
@@ -6,11 +9,12 @@ class QuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: QuizPage(),
           ),
         ),
@@ -26,17 +30,29 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
-  List<String> question = [
-    'Tanvir is a good boy!',
-    'Tanvir is a bad boy!',
-    'Tanvir is a very bad boy!',
-  ];
-  List<bool> answer = [
-    false,
-    true,
-    true,
-  ];
-  int qutrack = 0;
+
+  void checkAns(bool userAns) {
+    bool correctans = quizBrain.getAns();
+    setState(() {
+      if (correctans == userAns) {
+        scorekeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scorekeeper.add(
+          Icon(
+            Icons.close,
+            color: Colors.redAccent,
+          ),
+        );
+      }
+
+      quizBrain.goNextQu();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +66,10 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                question[qutrack],
+                quizBrain.getQuText(),
                 style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
@@ -64,21 +82,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: () {
-                bool correctans = answer[qutrack];
-
-                if (correctans == true) {
-                  print('Right!');
-                } else {
-                  print('DeadWrong!');
-                }
-                setState(
-                  () {
-                    if (qutrack == 2) {
-                      qutrack = 0;
-                    } else
-                      qutrack++;
-                  },
-                );
+                checkAns(true);
               },
               color: Colors.green,
               child: Text(
@@ -97,21 +101,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: FlatButton(
               onPressed: () {
-                bool correctans = answer[qutrack];
-
-                if (correctans == false) {
-                  print('Right!');
-                } else {
-                  print('DeadWrong!');
-                }
-                setState(
-                  () {
-                    if (qutrack == 2) {
-                      qutrack = 0;
-                    } else
-                      qutrack++;
-                  },
-                );
+                checkAns(false);
               },
               color: Colors.redAccent,
               child: Text(
@@ -126,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Row(
           children: scorekeeper,
-        )
+        ),
       ],
     );
   }
