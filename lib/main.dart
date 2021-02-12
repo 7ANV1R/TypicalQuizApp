@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'quizbrain.dart';
 
@@ -114,8 +115,12 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Row(
-          children: scorekeeper,
+        SingleChildScrollView(
+          dragStartBehavior: DragStartBehavior.start,
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: scorekeeper,
+          ),
         ),
       ],
     );
